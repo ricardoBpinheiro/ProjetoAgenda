@@ -33,7 +33,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private ImageView imvLogo;
     private EditText barraEmail;
@@ -73,6 +73,8 @@ public class Login extends AppCompatActivity {
 
         //Inicializa o firebase
         firebaseAuth = firebaseAuth.getInstance();
+
+        conectarGoogleApi();
 
         //Vai lembrar a senha quando estiver ativo a check box
         pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -207,7 +209,7 @@ public class Login extends AppCompatActivity {
                 .build();
 
         googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, (GoogleApiClient.OnConnectionFailedListener) this)
+                .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }
@@ -261,12 +263,10 @@ public class Login extends AppCompatActivity {
         firebaseAuth = Conexao.getFirebaseAuth();
     }
 
-   /* @Override
+    @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(this, "Conexão falhou", Toast.LENGTH_SHORT).show();
-    }*/
-
-
+    }
 
 
 }
