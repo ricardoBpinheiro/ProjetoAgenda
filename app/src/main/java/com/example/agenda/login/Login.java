@@ -118,8 +118,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         login(email, senha);
                     } else {  //Se a checkbox não esta clicada apenas faz o login e nao salva nada
 
-                        Intent intent = new Intent(Login.this, TelaCarregamento.class);
-                        startActivity(intent);
+                        //Apaga isso que ta feio
+                        //Intent intent = new Intent(Login.this, TelaCarregamento.class);
+                        //startActivity(intent);
 
                         SharedPreferences config =  PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                         SharedPreferences.Editor editor = config.edit();
@@ -129,7 +130,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         String email1 = barraEmail.getText().toString().trim();
                         String senha1 = barraSenha.getText().toString().trim();
                         login(email1, senha1);
-
                     }}
             }
         });
