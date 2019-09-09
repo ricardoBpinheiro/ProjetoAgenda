@@ -101,9 +101,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 else{
                     if (cbLembrarSenha.isChecked()) { //Se a checkbox esta clicada
 
-                        Intent intent = new Intent(Login.this, TelaCarregamento.class);
-                        startActivity(intent);
-
                         prefEditor.putString(getString(R.string.checkbox), "True"); //Vai abrir o app com a checkbox clicada
                         prefEditor.commit();
 
@@ -118,9 +115,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         login(email, senha);
                     } else {  //Se a checkbox não esta clicada apenas faz o login e nao salva nada
 
-                        Intent intent = new Intent(Login.this, TelaCarregamento.class);
-                        startActivity(intent);
-
                         SharedPreferences config =  PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                         SharedPreferences.Editor editor = config.edit();
                         editor.clear();   //Retira os dados guardados no SharedPreferences
@@ -134,6 +128,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
         });
 
+        //Botão para fazer o login com a conta do google
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,6 +157,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         //barraEmail.setText(email2.toString());
 //        barraSenha.setText(dados2.getString("senha").toString());
     }
+
+    //<Login Google>
     private void signIn() {
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent, 1);
@@ -213,7 +210,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }
+    //</Login Google>
 
+    //<Salvando email e senha digitados
     private void checkSharedPreferences() {
         String checkbox = pref.getString(getString(R.string.checkbox), "False");
         String email = pref.getString(getString(R.string.email), "");
@@ -229,6 +228,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             cbLembrarSenha.setChecked(false);
         }
     }
+    //</Salvando email e senha digitados
+
+    //<Login com email e senha cadastrados
     private void login(String email, String senha) {
         firebaseAuth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -249,12 +251,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                     }
                 });
-
     }
+    //</Login com email e senha cadastrados
 
-    @Override  //Bloqueia o Botão de voltar do celular
+    //Bloqueia o Botão de voltar do celular
+    @Override
     public void onBackPressed() {
-
     }
 
     @Override
@@ -267,6 +269,4 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(this, "Conexão falhou", Toast.LENGTH_SHORT).show();
     }
-
-
 }
