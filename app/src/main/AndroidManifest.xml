@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.TelaCarregamento"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".login.TelaCarregamento" />
         <activity android:name=".login.ResetPassword" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".login.Cadastro" />
         <activity android:name=".login.Login">
             <intent-filter>
