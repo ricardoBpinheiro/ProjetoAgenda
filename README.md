@@ -9,3 +9,6 @@ Projeto de software - 4°fase<br>
 4- Botão de configuração, perfil e logout<br>
 5- Editar perfil de usuario<br>
 6- FloatingActionButton para adicionar mais listas<br>
+7- Conexão do banco de dados com o firebase<br>
+8- Aba lista de favoritos<br>
+9- Ser responsivo<br>
